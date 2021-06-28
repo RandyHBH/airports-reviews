@@ -10,5 +10,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
 interface ReviewRepository : JpaRepository<Review, Long>, JpaSpecificationExecutor<Review> {
-	  
+
+	  @Query("SELECT r.airportName as airportName, COUNT(r) as amountOfReviews from Review r group by r.airportName Order by amountOfReviews")
+	  fun getAllStats(): List<ReviewAllStats>
 }
