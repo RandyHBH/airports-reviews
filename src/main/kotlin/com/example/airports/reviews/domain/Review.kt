@@ -19,8 +19,10 @@ data class Review(
 
 	  val date: LocalDate,
 
+	  @Column(columnDefinition = "text")
 	  val content: String,
 
+	  @Column(columnDefinition = "text")
 	  val experienceAirport: String?,
 
 	  val dateVisit: LocalDate?,
