@@ -16,4 +16,6 @@ interface ReviewRepository : JpaRepository<Review, Long>, JpaSpecificationExecut
 
 	  @Query("""SELECT r.airportName as airportName, count(r) as amountOfReviews, avg(r.overallRating) as overallRatingAvg, count(r.recommended) as countOfRecommended	from Review r where r.airportName=:airport GROUP BY r.airportName""")
 	  fun getAllStatsByAirport(@Param("airport") airport: String): List<ReviewAllStatsAirport>
+
+	  fun getAllByAirportNameOrderByDateDesc(airport: String): List<ReviewShort>
 }

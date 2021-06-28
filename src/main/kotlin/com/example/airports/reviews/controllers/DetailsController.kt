@@ -20,6 +20,10 @@ class DetailsController(
 
 	  @GetMapping("/{airport}/stats")
 	  fun getStatsByAirport(@PathVariable airport: String) = detailsService.getAllStatsByAirport(airport)
+
+	  @GetMapping("/{airport}/reviews")
+	  fun getReviewsByAirport(@PathVariable airport: String) = detailsService.getReviewsByAirport(airport)
+
 }
 
 
