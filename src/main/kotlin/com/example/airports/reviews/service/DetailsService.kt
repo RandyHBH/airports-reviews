@@ -21,4 +21,5 @@ class DetailsService(
 	  fun addReviewToAirport(airport: String, request: Review): ReviewResponse =
 			reviewRepository.saveAndFlush(request).toReviewResponse()
 
+	  fun find(reviewSpecs: ReviewSpecs) = reviewRepository.findAll(reviewSpecs).map { it.toReviewResponse() }
 }

@@ -28,6 +28,14 @@ class DetailsController(
 	  fun addReviewsToAirport(@PathVariable airport: String, @Valid @RequestBody request: ReviewRequest) =
 	  	  detailsService.addReviewToAirport(airport, request.toReview())
 
+	  @GetMapping("/find")
+	  fun findAirportReview(
+			@RequestParam(required = false) minRating: Long?,
+			@RequestParam(required = false) maxRating: Long?,
+			@RequestParam(required = false) airportName: String?,
+			reviewSpecs: ReviewSpecs
+	  ) = detailsService.find(reviewSpecs)
+
 }
 
 
