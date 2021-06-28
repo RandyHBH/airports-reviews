@@ -18,6 +18,8 @@ class DetailsController(
 	  @GetMapping("/all/stats")
 	  fun getStats() = detailsService.getAllStats()
 
+	  @GetMapping("/{airport}/stats")
+	  fun getStatsByAirport(@PathVariable airport: String) = detailsService.getAllStatsByAirport(airport)
 }
 
 
