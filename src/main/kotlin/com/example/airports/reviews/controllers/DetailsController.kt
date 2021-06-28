@@ -26,7 +26,7 @@ class DetailsController(
 			response = ReviewAllStats::class
 	  )
 	  @GetMapping("/{airport}/stats")
-	  fun getStatsByAirport(@PathVariable airport: String) = detailsService.getAllStatsByAirport(airport)
+	  fun getAirportStats(@PathVariable airport: String) = detailsService.getAirportStats(airport)
 
 	  @ApiOperation(value = "Giving an airport will return all the reviews for it", response = ReviewShort::class)
 	  @GetMapping("/{airport}/reviews")
@@ -35,7 +35,7 @@ class DetailsController(
 	  @ApiOperation(value = "Add a new review airport review", response = ReviewResponse::class)
 	  @PostMapping("/{airport}/reviews")
 	  fun addReviewsToAirport(@PathVariable airport: String, @Valid @RequestBody request: ReviewRequest) =
-	  	  detailsService.addReviewToAirport(airport, request.toReview())
+			detailsService.addReviewToAirport(airport, request.toReview())
 
 	  @ApiOperation(
 			value = "Giving an airport and a rating will respond will the reviews with that rating or higher",
@@ -43,12 +43,10 @@ class DetailsController(
 	  )
 	  @GetMapping("/find")
 	  fun findAirportReview(
-			@RequestParam(required = false) minRating: Long?,
-			@RequestParam(required = false) maxRating: Long?,
+			@RequestParam(required = false) rating: Long?,
 			@RequestParam(required = false) airportName: String?,
 			reviewSpecs: ReviewSpecs
 	  ) = detailsService.find(reviewSpecs)
-
 }
 
 

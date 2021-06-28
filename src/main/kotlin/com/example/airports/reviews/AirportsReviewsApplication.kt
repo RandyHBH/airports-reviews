@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class AirportsReviewsApplication
 
 fun main(args: Array<String>) {
-	runApplication<AirportsReviewsApplication>(*args)
+	  runApplication<AirportsReviewsApplication>(*args)
 }

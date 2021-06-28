@@ -46,7 +46,7 @@ internal class DetailsServiceTest {
 
 	  @Test
 	  fun getAllStatsByAirport() {
-			val allStatsByAirport = detailsService.getAllStatsByAirport("aberdeen-airport")
+			val allStatsByAirport = detailsService.getAirportStats("aberdeen-airport")
 
 			Assertions.assertThat(allStatsByAirport.airportName).isEqualTo("aberdeen-airport")
 			Assertions.assertThat(allStatsByAirport.amountOfReviews).isEqualTo(10)

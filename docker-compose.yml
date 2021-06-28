@@ -9,8 +9,6 @@ services:
     ports:
       - 8080:8080
     container_name: app
-    volumes:
-      - ./logstash:/config_dir
     depends_on:
       - db
     environment:
@@ -29,4 +27,4 @@ services:
       - POSTGRES_DB=reviewsdb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    
+

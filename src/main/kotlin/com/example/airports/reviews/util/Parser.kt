@@ -1,17 +1,20 @@
 package com.example.airports.reviews.util
 
 import com.example.airports.reviews.domain.Review
+import com.opencsv.CSVParserBuilder
+import com.opencsv.CSVReader
 import mu.KotlinLogging
 import org.springframework.web.multipart.MultipartFile
 import java.io.BufferedReader
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+
 class Parser {
 	  private val logger = KotlinLogging.logger {}
 
 	  companion object {
-			private const val CSV_DELIMITER = ";"
+			private const val CSV_DELIMITER = ';'
 			private const val CSV_AIRPORT_NAME = 0
 			private const val CSV_LINK = 1
 			private const val CSV_TITLE = 2

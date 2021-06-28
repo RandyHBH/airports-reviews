@@ -14,7 +14,7 @@ class DetailsService(
 
 	  fun getAllStats() = reviewRepository.getAllStats()
 
-	  fun getAllStatsByAirport(airport: String) = reviewRepository.getAllStatsByAirport(airport)
+	  fun getAirportStats(airport: String) = reviewRepository.getAirportStats(airport)
 
 	  fun getReviewsByAirport(airport: String) = reviewRepository.getAllByAirportNameOrderByDateDesc(airport)
 
