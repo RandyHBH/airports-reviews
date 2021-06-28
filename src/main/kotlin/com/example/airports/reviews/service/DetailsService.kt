@@ -18,4 +18,7 @@ class DetailsService(
 
 	  fun getReviewsByAirport(airport: String) = reviewRepository.getAllByAirportNameOrderByDateDesc(airport)
 
+	  fun addReviewToAirport(airport: String, request: Review): ReviewResponse =
+			reviewRepository.saveAndFlush(request).toReviewResponse()
+
 }

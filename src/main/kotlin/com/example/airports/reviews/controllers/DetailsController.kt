@@ -24,6 +24,10 @@ class DetailsController(
 	  @GetMapping("/{airport}/reviews")
 	  fun getReviewsByAirport(@PathVariable airport: String) = detailsService.getReviewsByAirport(airport)
 
+	  @PostMapping("/{airport}/reviews")
+	  fun addReviewsToAirport(@PathVariable airport: String, @Valid @RequestBody request: ReviewRequest) =
+	  	  detailsService.addReviewToAirport(airport, request.toReview())
+
 }
 
 
