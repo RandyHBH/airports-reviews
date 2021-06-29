@@ -1,8 +1,10 @@
 package com.example.airports.reviews.util
 
 import com.example.airports.reviews.domain.Review
+import com.opencsv.CSVParser
 import com.opencsv.CSVParserBuilder
 import com.opencsv.CSVReader
+import com.opencsv.CSVReaderBuilder
 import mu.KotlinLogging
 import org.springframework.web.multipart.MultipartFile
 import java.io.BufferedReader
@@ -40,33 +42,37 @@ class Parser {
 	  fun getReviewsFromCsv(file: MultipartFile): ArrayList<Review> {
 			val reviews = ArrayList<Review>()
 			var reader: BufferedReader? = null
+			var csvReader: CSVReader? = null
+			val parser: CSVParser = CSVParserBuilder().withSeparator(CSV_DELIMITER).build()
 
 			try {
 				  reader = BufferedReader(file.inputStream.bufferedReader())
-				  skipHeaderLine(reader)
-				  var row = reader.readLine()
+				  csvReader = CSVReaderBuilder(reader).withSkipLines(1).withCSVParser(parser).build()
+
+				  var row = csvReader.readNext()
 
 				  while (row != null) {
-						val columns: List<String> = row.split(CSV_DELIMITER)
+						val columns = row
 
 						try {
 							  buildReviewAddToList(columns, reviews)
 						} catch (e: Exception) {
-							  logger.error(e){"Error during processing, skipping this line $columns"}
+							  logger.error(e) { "Error during processing, skipping this line $columns" }
 						}
 
-						row = reader.readLine()
+						row = csvReader.readNext()
 				  }
 			} catch (e: Exception) {
-				  e.printStackTrace()
+				  logger.error(e) { "General Exception while parsing the CSV" }
 			} finally {
 				  reader!!.close()
+				  csvReader!!.close()
 			}
 
 			return reviews
 	  }
 
-	  private fun buildReviewAddToList(columns: List<String>, reviews: ArrayList<Review>) {
+	  private fun buildReviewAddToList(columns: Array<String>, reviews: ArrayList<Review>) {
 			if (columns.isNotEmpty()) {
 				  val airportName = columns[CSV_AIRPORT_NAME]
 				  val link = columns[CSV_LINK]
